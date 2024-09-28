@@ -96,3 +96,5 @@
 
 3. #### В конце квеста Вам будет показано секретное слово, которое Вы должны будете предоставить в отчете.
    ![Alt text](images/photo_24.jpg) <br><br>
+
+   Secret key: OSMcAggoDTc5DwAdCERGe0FCVGdRSH5R
