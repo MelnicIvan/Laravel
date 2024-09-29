@@ -27,7 +27,6 @@
             <a href="{{ route('tasks.create') }}" class="callback">Создать задачу</a>
         </div>
     </div>
-
 </nav>
 
 <div class="content">

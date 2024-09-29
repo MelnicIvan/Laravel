@@ -15,5 +15,6 @@
             <li>Поддержка командной работы</li>
         </ul>
         <p class="about-gratitude">Спасибо, что выбрал именно наш продукт!</p>
+        <div class="about-image"></div>
     </div>
 @endsection

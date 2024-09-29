@@ -144,7 +144,7 @@ th, td {
     border-spacing: 0;
     width: 80%;
     border: 1px solid #ddd;
-    margin: 0 200px;
+    margin: 0 auto;
 }
 
 .task-link{
@@ -231,6 +231,20 @@ th, td {
     color:black;
     transform:scale(1.05);
 }
+
+.about-section{
+    height: 89.9vh;
+}
+
+.about-image{
+    position:relative;
+    background-image: url("../images/milota_.png");
+    height: 225px;
+    width: 225px;
+    margin: 0 auto;
+}
+
+
 
 
 
