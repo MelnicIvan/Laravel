@@ -2,87 +2,89 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Tag;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+
     public function index()
     {
-        $tasks = [
-            1 => [
-                'id' => 1,
-                'title' => 'Купить продукты',
-                'description' => 'Сходить в магазин и купить продукты',
-                'status' => 'В процессе',
-                'priority' => 'Высокий',
-                'assignment' => 'Иван Иванов',
-                'created_at' => '2024-09-25',
-                'updated_at' => '2024-09-26'
-            ],
-            2 => [
-                'id' => 2,
-                'title' => 'Закончить проект',
-                'description' => 'Завершить проект для клиента',
-                'status' => 'Ожидается',
-                'priority' => 'Средний',
-                'assignment' => 'Петр Петров',
-                'created_at' => '2024-09-20',
-                'updated_at' => '2024-09-23'
-            ]
-        ];
-        return view('tasks.index', ['tasks' => $tasks]);
+        $tasks = Task::with(['category', 'tags'])->get();
+        return view('tasks.index', compact('tasks'));
     }
+
+    public function home()
+    {
+        $lastTask = Task::latest()->first();
+        return view('home', compact('lastTask'));
+    }
+
 
     public function create()
     {
-        return view('tasks.create');
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('tasks.create', compact('categories', 'tags'));
     }
 
     public function store(Request $request)
     {
-        return 'destroy';
-    }
-
-    public function show($id)
-    {
-        $tasks = [
-            1 => [
-                'id' => 1,
-                'title' => 'Купить продукты',
-                'description' => 'Сходить в магазин и купить продукты',
-                'status' => 'В процессе',
-                'priority' => 'Высокий',
-                'assignment' => 'Иван Иванов',
-                'created_at' => '2024-09-25',
-                'updated_at' => '2024-09-26'
-            ],
-            2 => [
-                'id' => 2,
-                'title' => 'Закончить проект',
-                'description' => 'Завершить проект для клиента',
-                'status' => 'Ожидается',
-                'priority' => 'Средний',
-                'assignment' => 'Петр Петров',
-                'created_at' => '2024-09-20',
-                'updated_at' => '2024-09-23'
-            ]
-        ];
-
-        return view('tasks.show', ['task' => $tasks[$id]]);
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
+        ]);
+        $task = Task::create($validated);
+        if ($request->has('tags')) {
+            $task->tags()->sync($request->input('tags'));
+        }
+        return redirect()->route('tasks.index')->with('success', 'Задача успешно создана!');
     }
 
     public function edit($id)
     {
-        return view('tasks.edit', ['id' => $id]);
+        $task = Task::with('tags')->findOrFail($id);
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return view('tasks.edit', compact('task', 'categories', 'tags'));
     }
 
     public function update(Request $request, $id)
     {
-        return $id + "update";
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
+        ]);
+
+        $task = Task::findOrFail($id);
+        $task->update($validated);
+
+        if ($request->has('tags')) {
+            $task->tags()->sync($request->input('tags'));
+        }
+
+        return redirect()->route('tasks.show', $task->id)->with('success', 'Задача успешно обновлена!');
     }
 
     public function destroy($id)
     {
-        return 'destroy' + $id;
+        $task = Task::findOrFail($id);
+        $task->delete();
+        return redirect()->route('tasks.index')->with('success', 'Задача успешно удалена!');
+    }
+
+    public function show($id)
+    {
+        $task = Task::findOrFail($id);
+        return view('tasks.show', ['task' => $task]);
     }
 }

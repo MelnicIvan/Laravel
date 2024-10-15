@@ -18,9 +18,9 @@
         <div class="overlay"></div>
     </header>
 
-    @if(isset($lastTask))
-        <h2 class="last-task-title">Последняя созданная задача</h2>
-        <x-task :task="$lastTask"/>
+    @if($lastTask)
+    <h2 class="last-task-title">Последняя созданная задача</h2>
+    <x-task :task="$lastTask"/>
     @else
         <p>Нет задач для отображения</p>
     @endif
