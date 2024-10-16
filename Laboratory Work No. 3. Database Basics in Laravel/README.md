@@ -41,7 +41,7 @@ DB_PASSWORD=...
       - `updated_at` — дата обновления категории.
   
   В файле миграций `create_categories_table`, добавим следующий код, который будет описывать структуру таблицы:
-  ```blade
+    ```blade
     public function up(): void
     {
       Schema::create('categories', function (Blueprint $table) {
@@ -51,7 +51,7 @@ DB_PASSWORD=...
             $table->timestamps();
         });
     }
-  ```
+    ```
 3. #### Создайте модель `Task` — задача.
    Создадим модель `Task` при помощи уже ранее использованной команды:
    ```blade
