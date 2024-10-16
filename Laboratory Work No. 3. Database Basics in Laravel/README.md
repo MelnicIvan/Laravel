@@ -361,11 +361,17 @@ Cоздадим промежуточную таблицу при помощи к
     }
 ```
 Запустим `seed'ы` при помощи соответствующей команды: `php artisan db:seed`. После просмотра содержимого наших таблиц можно заметить, что в каждой из таблиц, для которых были созданы `factory` и `seed'ы`, сгенерировались данные:
+
 Таблица `Tasks`:
+
 ![Alt text](../labs_screens/lab_3_screens/task_table.jpg) <br>
+
 Таблица `Categories`:
+
 ![Alt text](../labs_screens/lab_3_screens/category_table.jpg) <br>
+
 Таблица `Tags`:
+
 ![Alt text](../labs_screens/lab_3_screens/tag_table.jpg) <br>
 
 ### №6. Работа с контроллерами и представлениями
@@ -388,7 +394,7 @@ Cоздадим промежуточную таблицу при помощи к
 
     Измененный метод `show` будет выглядеть следующим образом:
     ```blade 
-       public function show($id)
+    public function show($id)
     {
         $task = Task::findOrFail($id);
         return view('tasks.show', ['task' => $task]);
