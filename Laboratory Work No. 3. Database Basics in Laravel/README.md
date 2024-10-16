@@ -41,7 +41,8 @@ DB_PASSWORD=...
       - `updated_at` — дата обновления категории.
   
   В файле миграций `create_categories_table`, добавим следующий код, который будет описывать структуру таблицы:
-    ```blade
+   ```blade
+    <?php
     public function up(): void
     {
       Schema::create('categories', function (Blueprint $table) {
@@ -51,7 +52,7 @@ DB_PASSWORD=...
             $table->timestamps();
         });
     }
-    ```
+   ```
 3. #### Создайте модель `Task` — задача.
    Создадим модель `Task` при помощи уже ранее использованной команды:
    ```blade
@@ -77,7 +78,8 @@ DB_PASSWORD=...
       - `created_at` — дата создания задачи;
       - `updated_at` — дата обновления задачи.
 
-```blade 
+```blade
+    <?php
     public function up(): void
     {
       Schema::create('tasks', function (Blueprint $table) {
@@ -120,7 +122,8 @@ DB_PASSWORD=...
       - `created_at` — дата создания тега;
       - `updated_at` — дата обновления тега.
 
-    ```blade 
+    ```blade
+     <?php
      public function up(): void
      {
         Schema::create('tags', function (Blueprint $table) {
@@ -143,7 +146,7 @@ DB_PASSWORD=...
     
 Пропишем указанную команду и получим следующий созданный файл, здесь же определим структуру полей и внешний ключ для связи с таблицей **`category`**
    ```blade 
-   <?php
+     <?php
 
      use Illuminate\Database\Migrations\Migration;
      use Illuminate\Database\Schema\Blueprint;
@@ -175,7 +178,7 @@ Cоздадим промежуточную таблицу при помощи к
     - Данная таблица должна связывать задачи и теги по их идентификаторам.
     - Например: task_id и tag_id: 10 задача связана с 5 тегом.
 ```blade 
-    <?php
+     <?php
 
      use Illuminate\Database\Migrations\Migration;
      use Illuminate\Database\Schema\Blueprint;
@@ -209,6 +212,7 @@ Cоздадим промежуточную таблицу при помощи к
 1. #### Добавьте отношения в модель `Category` (Категория может иметь много задач)
    - Откройте модель `Category` и добавьте метод: `php public function tasks() { return $this->hasMany(Task::class); }`
    ```blade
+    <?php
     class Category extends Model
     {
     use HasFactory;
@@ -227,6 +231,7 @@ Cоздадим промежуточную таблицу при помощи к
    - Задача прикреплена к одной категории.
    - Задача может иметь много тегов.
     ```blade
+    <?php
     class Task extends Model
     {
      use HasFactory;
@@ -245,7 +250,8 @@ Cоздадим промежуточную таблицу при помощи к
    ```
 
 3. #### Добавьте отношения в модель `Tag` (Тег может быть прикреплен к многим задачам)
-    ```blade 
+    ```blade
+    <?php
     class Tag extends Model
     {
      use HasFactory;
@@ -268,7 +274,8 @@ Cоздадим промежуточную таблицу при помощи к
     - Определите структуру данных для генерации категорий.
 
    Применим команду `php artisan make:factory CategoryFactory --model=Category` и получим следующий сгенерированный файл:
-    ```blade 
+    ```blade
+    <?php
     class CategoryFactory extends Factory
     {
     protected $model = Category::class;
@@ -285,6 +292,7 @@ Cоздадим промежуточную таблицу при помощи к
     После генерации файла вносим изменения, которые определяют структуру данных для генерации категорий.
 2. #### Создайте фабрику для модели `Task`.
     ```blade
+    <?php
     class TaskFactory extends Factory
     {
      protected $model = Task::class;
@@ -300,7 +308,8 @@ Cоздадим промежуточную таблицу при помощи к
     }
     ```
 3. #### Создайте фабрику для модели `Tag`.
-    ```blade 
+    ```blade
+     <?php
      class Tag extends Model
      {
      use HasFactory;
@@ -315,36 +324,40 @@ Cоздадим промежуточную таблицу при помощи к
    ```
 4. #### Создайте сиды `(seeders)` для заполнения таблиц начальными данными для моделей: `Category, Task, Tag`.
     Создадим `seed'ы` для существующих моделей:
-    ```blade 
-   class CategorySeeder extends Seeder
-   {
-     public function run()
-     {
-       Category::factory(10)->create(); // Создание 10 категорий
-     }
-   }
+    ```blade
+    <?php
+    class CategorySeeder extends Seeder
+    {
+      public function run()
+      {
+        Category::factory(10)->create(); // Создание 10 категорий
+      }
+    }
     ```
-    ```blade 
-   class TagSeeder extends Seeder
-   {
-     public function run()
-     {
-       Tag::factory(15)->create(); // Создание 15 тегов
-     }
-   }
+    ```blade
+    <?php
+    class TagSeeder extends Seeder
+    {
+      public function run()
+      {
+        Tag::factory(15)->create(); // Создание 15 тегов
+      }
+    }
     ```
-    ```blade 
-   class TaskSeeder extends Seeder
-   {
-     public function run()
-     {
-       Task::factory(20)->create(); // Создание 20 задач
-     }
-   }
+    ```blade
+    <?php
+    class TaskSeeder extends Seeder
+    {
+      public function run()
+      {
+        Task::factory(20)->create(); // Создание 20 задач
+      }
+    }
     ```
 5. #### Обновите файл `DatabaseSeeder` для запуска сидов и запустите их: `bash php artisan db:seed`
 Обновим файл `DatabaseSeeder`:
-```blade 
+```blade
+   <?php
    class DatabaseSeeder extends Seeder
    {
     /**
@@ -381,7 +394,8 @@ Cоздадим промежуточную таблицу при помощи к
     - Используйте модель Task для получения всех задач. 
    
     Обновим метод `index`, чтобы данные загружались из БД:
-   ```blade 
+   ```blade
+    <?php
     public function index()
     {
         $tasks = Task::with(['category', 'tags'])->get();
@@ -393,7 +407,8 @@ Cоздадим промежуточную таблицу при помощи к
     - Обязательно отобразите категорию и теги задачи.
 
     Измененный метод `show` будет выглядеть следующим образом:
-    ```blade 
+    ```blade
+    <?php
     public function show($id)
     {
         $task = Task::findOrFail($id);
@@ -440,6 +455,7 @@ Cоздадим промежуточную таблицу при помощи к
     Добавим использование метода `with` для загрузки моделей, которые имеют связь с `Task`:
     Метод `index`:
     ```blade
+    <?php
     public function index()
     {
       $tasks = Task::with(['category', 'tags'])->get();
@@ -448,6 +464,7 @@ Cоздадим промежуточную таблицу при помощи к
     ```
     Метод `show`:
     ```blade
+    <?php
     public function show($id)
     {
       $task = Task::with(['category', 'tags'])->findOrFail($id);
@@ -459,87 +476,88 @@ Cоздадим промежуточную таблицу при помощи к
     - Например: `php $request->input('title'); // или $request->all();`
     
    Файл `TaskController`:
-    ```blade 
-   class TaskController extends Controller
-   {
-     public function index()
-     {
-     $tasks = Task::with(['category', 'tags'])->get();
-     return view('tasks.index', ['tasks' => $tasks]);
-     }
+    ```blade
+    <?php
+    class TaskController extends Controller
+    {
+      public function index()
+      {
+      $tasks = Task::with(['category', 'tags'])->get();
+      return view('tasks.index', ['tasks' => $tasks]);
+      }
 
-     public function home()
-     {
-        $lastTask = Task::latest()->first();
-        return view('home', compact('lastTask'));
-     }
+      public function home()
+      {
+         $lastTask = Task::latest()->first();
+         return view('home', compact('lastTask'));
+      }
 
 
-     public function create()
-     {
-        $categories = Category::all();
-        $tags = Tag::all();
-        return view('tasks.create', compact('categories', 'tags'));
-     }
+      public function create()
+      {
+         $categories = Category::all();
+         $tags = Tag::all();
+         return view('tasks.create', compact('categories', 'tags'));
+      }
 
-     public function store(Request $request)
-     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'category_id' => 'required|exists:categories,id',
-            'tags' => 'nullable|array',
-            'tags.*' => 'exists:tags,id',
-        ]);
-        $task = Task::create($validated);
-        if ($request->has('tags')) {
-            $task->tags()->sync($request->input('tags'));
-        }
-        return redirect()->route('tasks.index')->with('success', 'Задача успешно создана!');
-     }
+      public function store(Request $request)
+      {
+         $validated = $request->validate([
+             'title' => 'required|string|max:255',
+             'description' => 'nullable|string',
+             'category_id' => 'required|exists:categories,id',
+             'tags' => 'nullable|array',
+             'tags.*' => 'exists:tags,id',
+         ]);
+         $task = Task::create($validated);
+         if ($request->has('tags')) {
+             $task->tags()->sync($request->input('tags'));
+         }
+         return redirect()->route('tasks.index')->with('success', 'Задача успешно создана!');
+      }
 
-     public function edit($id)
-     {
-        $task = Task::with('tags')->findOrFail($id);
-        $categories = Category::all();
-        $tags = Tag::all();
+      public function edit($id)
+      {
+         $task = Task::with('tags')->findOrFail($id);
+         $categories = Category::all();
+         $tags = Tag::all();
 
-        return view('tasks.edit', compact('task', 'categories', 'tags'));
-     }
+         return view('tasks.edit', compact('task', 'categories', 'tags'));
+      }
 
-     public function update(Request $request, $id)
-     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'category_id' => 'required|exists:categories,id',
-            'tags' => 'nullable|array',
-            'tags.*' => 'exists:tags,id',
-        ]);
+      public function update(Request $request, $id)
+      {
+         $validated = $request->validate([
+             'title' => 'required|string|max:255',
+             'description' => 'nullable|string',
+             'category_id' => 'required|exists:categories,id',
+             'tags' => 'nullable|array',
+             'tags.*' => 'exists:tags,id',
+         ]);
 
-        $task = Task::findOrFail($id);
-        $task->update($validated);
+         $task = Task::findOrFail($id);
+         $task->update($validated);
 
-        if ($request->has('tags')) {
-            $task->tags()->sync($request->input('tags'));
-        }
+         if ($request->has('tags')) {
+             $task->tags()->sync($request->input('tags'));
+         }
 
-        return redirect()->route('tasks.show', $task->id)->with('success', 'Задача успешно обновлена!');
-     }
+         return redirect()->route('tasks.show', $task->id)->with('success', 'Задача успешно обновлена!');
+      }
 
-     public function destroy($id)
-     {
-        $task = Task::findOrFail($id);
-        $task->delete();
-        return redirect()->route('tasks.index')->with('success', 'Задача успешно удалена!');
-     }
+      public function destroy($id)
+      {
+         $task = Task::findOrFail($id);
+         $task->delete();
+         return redirect()->route('tasks.index')->with('success', 'Задача успешно удалена!');
+      }
 
-     public function show($id)
-     {
-        $task = Task::with(['category', 'tags'])->findOrFail($id);
-        return view('tasks.show', ['task' => $task]);
-     }
-    } 
+      public function show($id)
+      {
+         $task = Task::with(['category', 'tags'])->findOrFail($id);
+         return view('tasks.show', ['task' => $task]);
+      }
+     } 
    ```
     Обновим страницу с отображением списка задач:
     ```blade 
@@ -617,6 +635,7 @@ Cоздадим промежуточную таблицу при помощи к
 6. #### Обновите метод `edit` для отображения формы редактирования задачи и метод `update` для сохранения изменений в базе данных.
    Внесем изменения в метод `edit`:
     ```blade
+    <?php
     public function edit($id)
     {
         $task = Task::with('tags')->findOrFail($id);
@@ -629,6 +648,7 @@ Cоздадим промежуточную таблицу при помощи к
 7. #### Обновите метод `destroy` для удаления задачи из базы данных.
    Внесем изменения в метод `destroy`:
    ```blade
+    <?php
     public function destroy($id)
     {
         $task = Task::findOrFail($id);
