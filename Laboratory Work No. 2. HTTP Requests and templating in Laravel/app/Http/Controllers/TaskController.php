@@ -9,11 +9,10 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-
     public function index()
     {
         $tasks = Task::with(['category', 'tags'])->get();
-        return view('tasks.index', compact('tasks'));
+        return view('tasks.index', ['tasks' => $tasks]);
     }
 
     public function home()
@@ -84,7 +83,7 @@ class TaskController extends Controller
 
     public function show($id)
     {
-        $task = Task::findOrFail($id);
+        $task = Task::with(['category', 'tags'])->findOrFail($id);
         return view('tasks.show', ['task' => $task]);
     }
 }

@@ -321,3 +321,169 @@ th, td {
     }
 }
 /* ====== ====== ====== */
+
+
+.card-header {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border-bottom: 2px solid #0056b3;
+}
+
+.card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #333;
+}
+
+.badge {
+    margin-right: 5px;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    text-decoration: none;
+    color:black;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-warning:hover {
+    text-decoration: none;
+    color:black;
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.card-footer{
+    display: flex;
+    gap:15px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+
+.todo-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.todo-table-header {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: #fff;
+    text-align: left;
+}
+
+.todo-table th, .todo-table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    vertical-align: middle;
+    transition: background-color 0.3s;
+}
+
+.todo-table-row:hover {
+    background-color: #f1f1f1;
+}
+
+.task-link {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.task-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.badge {
+    margin-right: 5px;
+}
+
+.badge:hover {
+    background-color: #5a6268; /* Цвет фона для тегов при наведении */
+    cursor: pointer; /* Указатель курсора при наведении */
+}
+
+.card-header {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    border-bottom: 2px solid #138496;
+}
+
+.card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control:focus {
+    border-color: #17a2b8;
+    box-shadow: 0 0 5px rgba(23, 162, 184, 0.5);
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    transition: background-color 0.3s, border-color 0.3s;
+    font-weight: bold;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.card-header {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border-bottom: 2px solid #0056b3;
+}
+
+.card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
