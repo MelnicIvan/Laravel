@@ -41,7 +41,7 @@ DB_PASSWORD=...
       - `updated_at` — дата обновления категории.
   
   В файле миграций `create_categories_table`, добавим следующий код, который будет описывать структуру таблицы:
-   ```blade
+```blade
     <?php
     public function up(): void
     {
@@ -52,10 +52,10 @@ DB_PASSWORD=...
             $table->timestamps();
         });
     }
-   ```
+```
 3. #### Создайте модель `Task` — задача.
    Создадим модель `Task` при помощи уже ранее использованной команды:
-   ```blade
+```blade
    <?php
 
     namespace App\Models;
@@ -68,7 +68,7 @@ DB_PASSWORD=...
         use HasFactory;
     }
 
-   ```
+```
 
 4. #### Определение структуры таблицы `task` в миграции:
    - Добавьте поля:
@@ -112,8 +112,7 @@ DB_PASSWORD=...
          return $this->belongsToMany(Task::class, 'task_tag');
      }
     }
-
-   ```
+```
     
 7. #### Определение структуры таблицы `Tag` в миграции:
   - Добавьте поля:
@@ -122,7 +121,7 @@ DB_PASSWORD=...
       - `created_at` — дата создания тега;
       - `updated_at` — дата обновления тега.
 
-    ```blade
+```blade
      <?php
      public function up(): void
      {
@@ -132,7 +131,7 @@ DB_PASSWORD=...
             $table->timestamps();
         });
       }
-    ```
+```
 
 8. #### Добавьте поле `$fillable` в модели `Task`, `Category` и `Tag` для массового заполнения данных.
     Для модели **`Task`** добавим следующую строку в определение класса: `protected $fillable = ['title', 'description', 'category_id'];` <br>
@@ -145,7 +144,7 @@ DB_PASSWORD=...
     - Определите структуру поля `category_id` и добавьте внешний ключ для связи с таблицей `category`.
     
 Пропишем указанную команду и получим следующий созданный файл, здесь же определим структуру полей и внешний ключ для связи с таблицей **`category`**
-   ```blade 
+```blade 
      <?php
 
      use Illuminate\Database\Migrations\Migration;
@@ -168,7 +167,7 @@ DB_PASSWORD=...
              });
      }
    };
-   ```
+```
 
 2. #### Создайте промежуточную таблицу для связи многие ко многим между задачами и тегами:
     - `php artisan make:migration create_task_tag_table`
@@ -202,16 +201,17 @@ Cоздадим промежуточную таблицу при помощи к
      }
     };
 
-   ```
+```
 4. #### Запустите миграцию для создания таблицы в базе данных.
 Для запуска миграции нам понадобится применить команду `php artisan migrate`
 После того, как данная команда сработает, увидим результат в нашей БД:
+
 ![Alt text](../labs_screens/lab_3_screens/task_tag_table.jpg) <br>
 
 ### №4. Связи между моделями
 1. #### Добавьте отношения в модель `Category` (Категория может иметь много задач)
    - Откройте модель `Category` и добавьте метод: `php public function tasks() { return $this->hasMany(Task::class); }`
-   ```blade
+```blade
     <?php
     class Category extends Model
     {
@@ -225,12 +225,12 @@ Cоздадим промежуточную таблицу при помощи к
         return $this->hasMany(Task::class);
     }
     }
-   ```
+```
 
 2. #### Добавьте отношения в модель `Task`
    - Задача прикреплена к одной категории.
    - Задача может иметь много тегов.
-    ```blade
+```blade
     <?php
     class Task extends Model
     {
@@ -247,10 +247,10 @@ Cоздадим промежуточную таблицу при помощи к
         return $this->belongsToMany(Tag::class, 'task_tag');
      }
     }
-   ```
+```
 
 3. #### Добавьте отношения в модель `Tag` (Тег может быть прикреплен к многим задачам)
-    ```blade
+```blade
     <?php
     class Tag extends Model
     {
@@ -263,7 +263,7 @@ Cоздадим промежуточную таблицу при помощи к
         return $this->belongsToMany(Task::class, 'task_tag');
      }
     } 
-    ```
+```
 
 4. #### Добавьте соотвтествующие поля в `$fillable` моделей.
     После внесения изменений поле `$fillable` для модели **Task** буде выглядеть следующим образом: `protected $fillable = ['title', 'description', 'category_id'];` 
@@ -274,7 +274,7 @@ Cоздадим промежуточную таблицу при помощи к
     - Определите структуру данных для генерации категорий.
 
    Применим команду `php artisan make:factory CategoryFactory --model=Category` и получим следующий сгенерированный файл:
-    ```blade
+```blade
     <?php
     class CategoryFactory extends Factory
     {
@@ -288,10 +288,10 @@ Cоздадим промежуточную таблицу при помощи к
         ];
     }
     }
-    ```
-    После генерации файла вносим изменения, которые определяют структуру данных для генерации категорий.
+```
+После генерации файла вносим изменения, которые определяют структуру данных для генерации категорий.
 2. #### Создайте фабрику для модели `Task`.
-    ```blade
+```blade
     <?php
     class TaskFactory extends Factory
     {
@@ -306,9 +306,9 @@ Cоздадим промежуточную таблицу при помощи к
         ];
      }
     }
-    ```
+```
 3. #### Создайте фабрику для модели `Tag`.
-    ```blade
+```blade
      <?php
      class Tag extends Model
      {
@@ -321,10 +321,10 @@ Cоздадим промежуточную таблицу при помощи к
         return $this->belongsToMany(Task::class, 'task_tag');
      }
     }
-   ```
+```
 4. #### Создайте сиды `(seeders)` для заполнения таблиц начальными данными для моделей: `Category, Task, Tag`.
     Создадим `seed'ы` для существующих моделей:
-    ```blade
+```blade
     <?php
     class CategorySeeder extends Seeder
     {
@@ -333,8 +333,8 @@ Cоздадим промежуточную таблицу при помощи к
         Category::factory(10)->create(); // Создание 10 категорий
       }
     }
-    ```
-    ```blade
+```
+```blade
     <?php
     class TagSeeder extends Seeder
     {
@@ -343,8 +343,8 @@ Cоздадим промежуточную таблицу при помощи к
         Tag::factory(15)->create(); // Создание 15 тегов
       }
     }
-    ```
-    ```blade
+```
+ ```blade
     <?php
     class TaskSeeder extends Seeder
     {
@@ -353,7 +353,7 @@ Cоздадим промежуточную таблицу при помощи к
         Task::factory(20)->create(); // Создание 20 задач
       }
     }
-    ```
+```
 5. #### Обновите файл `DatabaseSeeder` для запуска сидов и запустите их: `bash php artisan db:seed`
 Обновим файл `DatabaseSeeder`:
 ```blade
@@ -394,29 +394,29 @@ Cоздадим промежуточную таблицу при помощи к
     - Используйте модель Task для получения всех задач. 
    
     Обновим метод `index`, чтобы данные загружались из БД:
-   ```blade
+```blade
     <?php
     public function index()
     {
         $tasks = Task::with(['category', 'tags'])->get();
         return view('tasks.index', compact('tasks'));
     }
-   ```
+```
 3. #### Обновите метод `show` для отображения отдельной задачи.
     - Отобразите информацию о задаче по ее идентификатору
     - Обязательно отобразите категорию и теги задачи.
 
     Измененный метод `show` будет выглядеть следующим образом:
-    ```blade
+```blade
     <?php
     public function show($id)
     {
         $task = Task::findOrFail($id);
         return view('tasks.show', ['task' => $task]);
     } 
-   ```
+```
    Для того, чтобы отдельно отображать информацию о задаче, укажем в качестве параметра `$id` задачи. Внесем изменения в файл `show.blade.php`:
-   ```blade 
+```blade 
    @section('content')
     <div class="container mt-4 d-flex justify-content-center">
         <div class="card shadow-lg" style="width: 100%; max-width: 800px; border-radius: 15px; overflow: hidden;">
@@ -450,43 +450,45 @@ Cоздадим промежуточную таблицу при помощи к
         </div>
     </div>
    @endsection
-   ```
+```
 4. #### В методах `index` и `show` используйте метод `with` **(Eager Loading)** для загрузки связанных моделей.
     Добавим использование метода `with` для загрузки моделей, которые имеют связь с `Task`:
-    Метод `index`:
-    ```blade
+    
+Метод `index`:
+```blade
     <?php
     public function index()
     {
       $tasks = Task::with(['category', 'tags'])->get();
       return view('tasks.index', ['tasks' => $tasks]);
     }
-    ```
-    Метод `show`:
-    ```blade
+```
+Метод `show`:
+```blade
     <?php
     public function show($id)
     {
       $task = Task::with(['category', 'tags'])->findOrFail($id);
       return view('tasks.show', ['task' => $task]);
     }
-    ```
+```
 5. #### Обновите соответствующие представления для отображения списка задач и отдельной задачи.
     - Примечание: Поскольку вы ещё не изучали работу с формами, используйте объект `Request` для получения данных. 
     - Например: `php $request->input('title'); // или $request->all();`
+   
     
-   Файл `TaskController`:
-<<<<<<< HEAD
-    ```blade 
-   <?php
-   class TaskController extends Controller
-   {
-     public function index()
+Файл `TaskController`:
+
+   ```blade 
+    <?php
+     class TaskController extends Controller
+     {
+      public function index()
      {
      $tasks = Task::with(['category', 'tags'])->get();
      return view('tasks.index', ['tasks' => $tasks]);
      }
-=======
+
     ```blade
     <?php
     class TaskController extends Controller
@@ -496,7 +498,7 @@ Cоздадим промежуточную таблицу при помощи к
       $tasks = Task::with(['category', 'tags'])->get();
       return view('tasks.index', ['tasks' => $tasks]);
       }
->>>>>>> 100750057a18be44107f8b046a371c8ddae27deb
+
 
       public function home()
       {
@@ -569,10 +571,10 @@ Cоздадим промежуточную таблицу при помощи к
          $task = Task::with(['category', 'tags'])->findOrFail($id);
          return view('tasks.show', ['task' => $task]);
       }
-     } 
-   ```
-    Обновим страницу с отображением списка задач:
-    ```blade 
+      } 
+```
+Обновим страницу с отображением списка задач:
+```blade 
    @extends('layouts.app')
    @section('content')
    <div class="container mt-4">
@@ -606,9 +608,9 @@ Cоздадим промежуточную таблицу при помощи к
       </div>
    </div> 
    @endsection
-   ```
+```
    Также внесем изменения в файл с отображением информации о отдельной задаче:
-   ```blade 
+```blade 
    @extends('layouts.app')
 
    @section('content')
@@ -643,10 +645,10 @@ Cоздадим промежуточную таблицу при помощи к
        </div>
    </div>
    @endsection
-   ```
+```
 6. #### Обновите метод `edit` для отображения формы редактирования задачи и метод `update` для сохранения изменений в базе данных.
    Внесем изменения в метод `edit`:
-    ```blade
+```blade
     <?php
     public function edit($id)
     {
@@ -656,10 +658,10 @@ Cоздадим промежуточную таблицу при помощи к
 
         return view('tasks.edit', compact('task', 'categories', 'tags'));
     }
-    ```
+```
 7. #### Обновите метод `destroy` для удаления задачи из базы данных.
    Внесем изменения в метод `destroy`:
-   ```blade
+```blade
     <?php
     public function destroy($id)
     {
@@ -667,7 +669,7 @@ Cоздадим промежуточную таблицу при помощи к
         $task->delete();
         return redirect()->route('tasks.index')->with('success', 'Задача успешно удалена!');
     }
-    ```
+```
 
 ## <center>Контрольные вопросы</center>
 1. #### Что такое миграции и для чего они используются?
