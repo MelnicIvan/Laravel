@@ -77,7 +77,7 @@ DB_PASSWORD=...
       - `created_at` — дата создания задачи;
       - `updated_at` — дата обновления задачи.
 
-   ```blade 
+```blade 
     public function up(): void
     {
       Schema::create('tasks', function (Blueprint $table) {
@@ -87,7 +87,7 @@ DB_PASSWORD=...
       $table->timestamps();
       });
     }
-   ```
+```
 5. #### Запустите миграцию для создания таблицы в базе данных: `bash php artisan migrate`
     Запустим команду `bash php artisan migrate` и посмотрим на содержимое нашей БД:
 ![Alt text](../labs_screens/lab_3_screens/db_after_migration.jpg) <br>
