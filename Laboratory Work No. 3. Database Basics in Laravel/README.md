@@ -460,6 +460,7 @@ Cоздадим промежуточную таблицу при помощи к
     
    Файл `TaskController`:
     ```blade 
+   <?php
    class TaskController extends Controller
    {
      public function index()
