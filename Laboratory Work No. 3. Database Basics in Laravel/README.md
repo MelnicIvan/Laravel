@@ -479,7 +479,7 @@ Cоздадим промежуточную таблицу при помощи к
     
 Файл `TaskController`:
 
-   ```blade 
+```blade 
     <?php
      class TaskController extends Controller
      {
@@ -488,8 +488,8 @@ Cоздадим промежуточную таблицу при помощи к
      $tasks = Task::with(['category', 'tags'])->get();
      return view('tasks.index', ['tasks' => $tasks]);
      }
-
-    ```blade
+```
+```blade
     <?php
     class TaskController extends Controller
     {
