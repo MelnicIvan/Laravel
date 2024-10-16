@@ -481,16 +481,6 @@ Cоздадим промежуточную таблицу при помощи к
 
 ```blade 
     <?php
-     class TaskController extends Controller
-     {
-      public function index()
-     {
-     $tasks = Task::with(['category', 'tags'])->get();
-     return view('tasks.index', ['tasks' => $tasks]);
-     }
-```
-```blade
-    <?php
     class TaskController extends Controller
     {
       public function index()
