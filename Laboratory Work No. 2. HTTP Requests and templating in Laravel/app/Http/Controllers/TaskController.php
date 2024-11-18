@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTaskRequest;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Task;
@@ -29,21 +30,19 @@ class TaskController extends Controller
         return view('tasks.create', compact('categories', 'tags'));
     }
 
-    public function store(Request $request)
+    public function store(CreateTaskRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'category_id' => 'required|exists:categories,id',
-            'tags' => 'nullable|array',
-            'tags.*' => 'exists:tags,id',
-        ]);
+        $validated = $request->validated();
+
         $task = Task::create($validated);
+
         if ($request->has('tags')) {
             $task->tags()->sync($request->input('tags'));
         }
+
         return redirect()->route('tasks.index')->with('success', 'Задача успешно создана!');
     }
+
 
     public function edit($id)
     {
