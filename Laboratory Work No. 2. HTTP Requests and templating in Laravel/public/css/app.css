@@ -487,3 +487,301 @@ th, td {
     background-color: #0056b3;
     border-color: #004085;
 }
+
+.btn-logout {
+    background: none;
+    border: none;
+    color: #000;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 30px;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+.btn-logout:hover {
+    color: #000;
+}
+
+
+.form-title {
+    color: #406882;
+    padding: 0 365px 0 365px ;
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.label {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #406882;
+}
+
+.input-field {
+    width:770px;
+    padding: 0.8rem;
+    border: 1px solid #aacbe5;
+    border-radius: 5px;
+    background-color: #f7fbff;
+    color: #406882;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #5f9fcf;
+    box-shadow: 0 0 5px rgba(95, 159, 207, 0.4);
+    outline: none;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin: 10px auto;
+    padding-left: 320px;
+}
+
+.password-error-message {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin: 10px auto;
+    padding-left: 280px;
+}
+
+.btn-submit {
+    padding: 0.8rem;
+    background-color: #5f9fcf;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #467aa4;
+}
+
+.btn-submit:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(95, 159, 207, 0.4);
+}
+
+/* Блок для ссылки на регистрацию */
+.register-link {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #406882;
+}
+
+/* Ссылка "Зарегистрироваться" */
+.btn-register {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background-color: #b0cde8;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-register:hover {
+    background-color: #467aa4;
+    box-shadow: 0 4px 10px rgba(70, 122, 164, 0.4);
+}
+
+.btn-register:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(95, 159, 207, 0.6);
+}
+
+
+
+
+
+/* Заголовок */
+.form-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #406882;
+}
+
+/* Стили формы */
+.form-register {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.label {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #406882;
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #aacbe5;
+    border-radius: 5px;
+    background-color: #f7fbff;
+    color: #406882;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #5f9fcf;
+    box-shadow: 0 0 5px rgba(95, 159, 207, 0.4);
+    outline: none;
+}
+
+/* Сообщения об ошибках */
+/*.error-message {*/
+/*    color: #e74c3c;*/
+/*    font-size: 0.9rem;*/
+/*    margin-top: 0.3rem;*/
+/*}*/
+
+/* Кнопка */
+.btn-submit {
+    padding: 0.8rem;
+    background-color: #5f9fcf;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #467aa4;
+}
+
+.btn-submit:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(95, 159, 207, 0.4);
+}
+
+/* Ссылка на вход */
+.login-link {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #406882;
+}
+
+.btn-login {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background-color: #8caac8;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #467aa4;
+    box-shadow: 0 4px 10px rgba(70, 122, 164, 0.4);
+}
+
+
+
+.btn-profile {
+    display: inline-block;
+    padding: 5px 5px;
+    background-color: #e18c0c;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.btn-profile:hover {
+    background-color: #975e01;
+    color: white;
+}
+
+
+
+
+
+
+.profile-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    text-align: center;
+    color: #2C3E50;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.profile-info {
+    font-size: 18px;
+    margin: 30px auto;
+
+}
+
+.profile-info p {
+    margin: 10px 0;
+    color: #34495E;
+}
+
+.profile-info strong {
+    color: #2980B9;
+}
+
+.btn-back-home {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #2980B9;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-back-home:hover {
+    background-color: #3498DB;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+

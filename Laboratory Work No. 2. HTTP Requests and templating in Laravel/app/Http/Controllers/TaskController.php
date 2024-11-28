@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Task;
-use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
@@ -43,36 +43,36 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with('success', 'Задача успешно создана!');
     }
 
-
     public function edit($id)
     {
-        $task = Task::with('tags')->findOrFail($id);
+        $task = Task::findOrFail($id);
         $categories = Category::all();
         $tags = Tag::all();
 
         return view('tasks.edit', compact('task', 'categories', 'tags'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateTaskRequest $request, $id)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'category_id' => 'required|exists:categories,id',
-            'tags' => 'nullable|array',
-            'tags.*' => 'exists:tags,id',
-        ]);
+        $validated = $request->validated();
 
         $task = Task::findOrFail($id);
-        $task->update($validated);
 
+        $task->update([
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'due_date' => $validated['due_date'],
+            'category_id' => $validated['category_id'],
+        ]);
+
+        // Обновляем теги (синхронизируем)
         if ($request->has('tags')) {
             $task->tags()->sync($request->input('tags'));
         }
 
         return redirect()->route('tasks.show', $task->id)->with('success', 'Задача успешно обновлена!');
     }
-
+    
     public function destroy($id)
     {
         $task = Task::findOrFail($id);

@@ -22,6 +22,11 @@
                     </div>
 
                     <div class="mb-4">
+                        <label for="due_date" class="form-label">Дата выполнения</label>
+                        <input type="date" name="due_date" id="due_date" class="form-control" value="{{ $task->due_date }}" required>
+                    </div>
+
+                    <div class="mb-4">
                         <label for="category_id" class="form-label">Категория</label>
                         <select name="category_id" id="category_id" class="form-select" required>
                             @foreach ($categories as $category)
@@ -51,4 +56,5 @@
         </div>
     </div>
 @endsection
+
 
