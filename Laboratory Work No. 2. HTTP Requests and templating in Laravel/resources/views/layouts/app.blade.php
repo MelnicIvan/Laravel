@@ -25,6 +25,20 @@
             </ul>
 
             <a href="{{ route('tasks.create') }}" class="callback">Создать задачу</a>
+
+            @auth
+                <a href="{{ route('profile') }}" class="btn-profile">Профиль</a>
+
+                @if(Auth::user()->isAdmin())
+                    <a href="{{ route('admin.profiles') }}" class="btn-profile">Просмотр профилей</a>
+                @endif
+
+                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="btn-logout">Выйти</button>
+                </form>
+            @endauth
+
         </div>
     </div>
 </nav>
