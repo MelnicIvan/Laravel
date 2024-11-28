@@ -13,13 +13,6 @@ class ProfileController extends Controller
         return view('profile', compact('user'));
     }
 
-//    public function adminProfiles()
-//    {
-//        $this->authorize('viewAny', User::class);
-//        $users = User::all();
-//        return view('admin.profiles', compact('users'));
-//    }
-
     public function adminProfiles()
     {
         $users = User::all();
